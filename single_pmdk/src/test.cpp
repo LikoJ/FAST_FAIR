@@ -37,10 +37,13 @@ int main(int argc, char **argv) {
       break;
     case 's':
       selection_ratio = atof(optarg);
+	  break;
     case 'i':
       input_path = optarg;
+	  break;
     case 'p':
       persistent_path = optarg;
+      break;
     default:
       break;
     }
@@ -59,13 +62,14 @@ int main(int argc, char **argv) {
   } else {
     pop = pmemobj_open(persistent_path, "btree");
     bt = POBJ_ROOT(pop, btree);
+    // D_RW(bt)->constructor(pop);
   }
 
   struct timespec start, end;
 
   // Reading data
   entry_key_t *keys = new entry_key_t[num_data];
-  entry_key_t *query = new entry_key_t[2000];
+  // entry_key_t *query = new entry_key_t[2000];
   unsigned long *bufs = new unsigned long[num_data];
 
   ifstream ifs;
@@ -82,7 +86,7 @@ int main(int argc, char **argv) {
   }
 
   ifs.close();
-
+/*
   ifs.open("../workload/number1.txt");
   if (!ifs) {
     cout << "query loading error!" << endl;
@@ -96,7 +100,7 @@ int main(int argc, char **argv) {
   }
 
   ifs.close();
-
+*/
   {
     clock_gettime(CLOCK_MONOTONIC, &start);
 
@@ -144,7 +148,7 @@ int main(int argc, char **argv) {
   }
 
   clear_cache();
-
+/*
   {
     clock_gettime(CLOCK_MONOTONIC, &start);
 
@@ -165,9 +169,9 @@ int main(int argc, char **argv) {
     printf("Range SEARCH elapsed_time: %ld, Avg: %f\n", elapsed_time,
            (double)elapsed_time / num_data);
   }
-
+*/
   delete[] keys;
-  delete[] query;
+  // delete[] query;
   delete[] bufs;
 
   pmemobj_close(pop);
