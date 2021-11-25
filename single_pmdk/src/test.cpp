@@ -82,7 +82,10 @@ int main(int argc, char **argv) {
   }
 
   for (int i = 0; i < num_data; ++i) {
-    ifs >> keys[i];
+    // ifs >> keys[i];
+    string tmp;
+    ifs >> tmp;
+    keys[i] = tmp.data();
   }
 
   ifs.close();

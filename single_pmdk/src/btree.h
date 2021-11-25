@@ -26,6 +26,7 @@
 #include <time.h>
 #include <unistd.h>
 #include <vector>
+#include <string>
 
 #define PAGESIZE (512)
 
