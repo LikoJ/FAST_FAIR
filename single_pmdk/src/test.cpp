@@ -37,10 +37,10 @@ int main(int argc, char **argv) {
       break;
     case 's':
       selection_ratio = atof(optarg);
-	  break;
+	    break;
     case 'i':
       input_path = optarg;
-	  break;
+	    break;
     case 'p':
       persistent_path = optarg;
       break;
