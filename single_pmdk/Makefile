@@ -21,7 +21,7 @@ FLAGS = -O3 -std=c++11 -g
 
 LIBS = -lrt -lm -lpmemobj
 
-OBJECT := btree.o \
+OBJECT := src\btree.o \
 
 TARGET = libfastfairtree.a
 
