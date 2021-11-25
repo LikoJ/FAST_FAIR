@@ -33,17 +33,70 @@
 
 #define IS_FORWARD(c) (c % 2 == 0)
 
+#define KEY_MAX_LENGTH 20
+
 class btree;
 class page;
+class MyString;
 
 POBJ_LAYOUT_BEGIN(btree);
 POBJ_LAYOUT_ROOT(btree, btree);
 POBJ_LAYOUT_TOID(btree, page);
 POBJ_LAYOUT_END(btree);
 
-using entry_key_t = int64_t;
+// using entry_key_t = int64_t;
+using entry_key_t = MyString;
 
 using namespace std;
+
+class MyString {
+public:
+  MyString() {
+    memset(str, 0, KEY_MAX_LENGTH);
+  }
+
+  MyString(const char* _str) {
+    size_t len = strlen(_str);
+    len = min(len, KEY_MAX_LENGTH);
+    memcpy(str, _str, len);
+  }
+
+  MyString(const MyString& ms) {
+    memcpy(str, ms.str, KEY_MAX_LENGTH);
+  }
+
+  void operator=(const MyString& ms) {
+    memcpy(str, ms.str, KEY_MAX_LENGTH);
+  }
+
+  void SetMax() {
+    memset(str, 127, KEY_MAX_LENGTH);
+  }
+
+  bool operator==(const MyString& ms) {
+    for (int i = 0; i < KEY_MAX_LENGTH; i++) {
+      if (str[i] != ms.str[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  bool operator<(const MyString& ms) {
+    bool equal = true;
+    for (int i = 0; i < KEY_MAX_LENGTH; i++) {
+      if (str[i] < ms.str[i]) {
+        equal = false;
+      } else if (str[i] > ms.str[i]) {
+        return false;
+      }
+    }
+    return !equal;
+  }
+
+private:
+  char str[KEY_MAX_LENGTH];
+};
 
 class btree {
 private:
