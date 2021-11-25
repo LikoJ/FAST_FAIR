@@ -108,7 +108,8 @@ int main(int argc, char **argv) {
     clock_gettime(CLOCK_MONOTONIC, &start);
 
     for (int i = 0; i < num_data; ++i) {
-      D_RW(bt)->btree_insert(keys[i], (char *)keys[i]);
+      // D_RW(bt)->btree_insert(keys[i], (char *)keys[i]);
+      D_RW(bt)->btree_insert(keys[i], nullptr);
     }
 
     clock_gettime(CLOCK_MONOTONIC, &end);
