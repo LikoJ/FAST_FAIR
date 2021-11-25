@@ -1,19 +1,16 @@
-CC = g++
-AR = ar crv
+.PHONY: all clean
+.DEFAULT_GOAL := all
 
-FLAGS = -O3 -std=c++11 -g
+LIBS=-lrt -lm -lpmemobj
+INCLUDES=-I ./include /home/skian/.local/bin/include
+CFLAGS=-O3 -std=c++11 -g
 
-LIBS = -lrt -lm -lpmemobj
+output = btree 
 
-OBJECT := btree.o \
+all: main
 
-TARGET = libfastfairtree.a
+main: src/test.cpp
+	g++ $(CFLAGS) -o btree src/test.cpp $(LIBS)
 
-$(TARGET) : $(OBJECT)
-	$(AR) $@ $^
-
-.cc.o :
-	$(CC) -c $(FLAGS) -o $@ $< $(LIBS)
-
-clean :
-	rm $(TARGET) *.o
+clean: 
+	rm $(output)
