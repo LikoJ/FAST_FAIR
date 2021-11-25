@@ -63,20 +63,23 @@ public:
     memcpy(str, ms.str, KEY_MAX_LENGTH);
   }
 
-  void operator=(const MyString& ms) {
+  MyString& operator=(const MyString& ms) {
     memcpy(str, ms.str, KEY_MAX_LENGTH);
+    return *this;
   }
 
-  void operator=(const char* _str) {
+  MyString& operator=(const char* _str) {
     memcpy(str, _str, KEY_MAX_LENGTH);
+    return *this;
   }
 
-  void operator=(const int64_t num) {
+  MyString& operator=(const int64_t num) {
     if (num == LONG_MAX) {
       memset(str, 127, KEY_MAX_LENGTH);
     } else if (num == 0) {
       memset(str, 0, KEY_MAX_LENGTH);
     }
+    return *this;
   }
 
   bool operator==(const MyString& ms) {
