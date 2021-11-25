@@ -33,7 +33,7 @@
 
 #define IS_FORWARD(c) (c % 2 == 0)
 
-#define KEY_MAX_LENGTH 20
+#define KEY_MAX_LENGTH 16
 
 class btree;
 class page;
@@ -56,9 +56,7 @@ public:
   }
 
   MyString(const char* _str) {
-    size_t len = strlen(_str);
-    len = min(len, KEY_MAX_LENGTH);
-    memcpy(str, _str, len);
+    memcpy(str, _str, KEY_MAX_LENGTH);
   }
 
   MyString(const MyString& ms) {
@@ -69,8 +67,16 @@ public:
     memcpy(str, ms.str, KEY_MAX_LENGTH);
   }
 
-  void SetMax() {
-    memset(str, 127, KEY_MAX_LENGTH);
+  void operator=(const char* _str) {
+    memcpy(str, _str, KEY_MAX_LENGTH);
+  }
+
+  void operator=(const int64_t num) {
+    if (num == LONG_MAX) {
+      memset(str, 127, KEY_MAX_LENGTH);
+    } else if (num == 0) {
+      memset(str, 0, KEY_MAX_LENGTH);
+    }
   }
 
   bool operator==(const MyString& ms) {
@@ -94,6 +100,26 @@ public:
     return !equal;
   }
 
+  bool operator>(const MyString& ms) {
+    bool equal = true;
+    for (int i = 0; i < KEY_MAX_LENGTH; i++) {
+      if (str[i] > ms.str[i]) {
+        equal = false;
+      } else if (str[i] < ms.str[i]) {
+        return false;
+      }
+    }
+    return !equal;
+  }
+
+  bool operator>=(const MyString& ms) {
+    for (int i = 0; i < KEY_MAX_LENGTH; i++) {
+      if (str[i] < ms.str[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
 private:
   char str[KEY_MAX_LENGTH];
 };
