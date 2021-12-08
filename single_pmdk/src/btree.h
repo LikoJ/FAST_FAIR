@@ -124,6 +124,10 @@ public:
     }
     return true;
   }
+
+  string getString() {
+    return string(str, KEY_MAX_LENGTH);
+  }
 private:
   char str[KEY_MAX_LENGTH];
 };
