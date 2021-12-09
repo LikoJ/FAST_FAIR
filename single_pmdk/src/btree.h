@@ -84,45 +84,19 @@ public:
   }
 
   bool operator==(const MyString& ms) {
-    for (int i = 0; i < KEY_MAX_LENGTH; i++) {
-      if (str[i] != ms.str[i]) {
-        return false;
-      }
-    }
-    return true;
+    return memcmp(str, ms.str, KEY_MAX_LENGTH) == 0;
   }
 
   bool operator<(const MyString& ms) {
-    bool equal = true;
-    for (int i = 0; i < KEY_MAX_LENGTH; i++) {
-      if (str[i] < ms.str[i]) {
-        equal = false;
-      } else if (str[i] > ms.str[i]) {
-        return false;
-      }
-    }
-    return !equal;
+    return memcmp(str, ms.str, KEY_MAX_LENGTH) < 0;
   }
 
   bool operator>(const MyString& ms) {
-    bool equal = true;
-    for (int i = 0; i < KEY_MAX_LENGTH; i++) {
-      if (str[i] > ms.str[i]) {
-        equal = false;
-      } else if (str[i] < ms.str[i]) {
-        return false;
-      }
-    }
-    return !equal;
+    return memcmp(str, ms.str, KEY_MAX_LENGTH) > 0;
   }
 
   bool operator>=(const MyString& ms) {
-    for (int i = 0; i < KEY_MAX_LENGTH; i++) {
-      if (str[i] < ms.str[i]) {
-        return false;
-      }
-    }
-    return true;
+    return memcmp(str, ms.str, KEY_MAX_LENGTH) >= 0;
   }
 
   string getString() {
