@@ -99,6 +99,10 @@ public:
     return memcmp(str, ms.str, KEY_MAX_LENGTH) >= 0;
   }
 
+  bool operator<=(const MyString& ms) {
+    return memcmp(str, ms.str, KEY_MAX_LENGTH) <= 0;
+  }
+
   string getString() {
     return string(str, KEY_MAX_LENGTH);
   }
