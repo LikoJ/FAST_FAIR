@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
 
     for (int i = 0; i < num_data; ++i) {
       // D_RW(bt)->btree_insert(keys[i], (char *)keys[i]);
-      cout << "Insert:" << keys[i].getString() << endl;
+      // cout << "Insert:" << keys[i].getString() << endl;
       D_RW(bt)->btree_insert(keys[i], (char *)&keys[i]);
     }
 
@@ -139,7 +139,7 @@ int main(int argc, char **argv) {
     clock_gettime(CLOCK_MONOTONIC, &start);
 
     for (int i = Dead; i < num_data; ++i) {
-      cout << "Search:" << keys[i].getString() << endl;
+      // cout << "Search:" << keys[i].getString() << endl;
       D_RW(bt)->btree_search(keys[i]);
     }
 
