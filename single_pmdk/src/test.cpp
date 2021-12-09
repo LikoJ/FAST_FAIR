@@ -110,7 +110,7 @@ int main(int argc, char **argv) {
     for (int i = 0; i < num_data; ++i) {
       // D_RW(bt)->btree_insert(keys[i], (char *)keys[i]);
       cout << "Insert:" << keys[i].getString() << endl;
-      D_RW(bt)->btree_insert(keys[i], nullptr);
+      D_RW(bt)->btree_insert(keys[i], &keys[i]);
     }
 
     clock_gettime(CLOCK_MONOTONIC, &end);
