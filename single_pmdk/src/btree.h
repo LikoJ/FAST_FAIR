@@ -10,6 +10,8 @@
 
    Please use at your own risk.
 */
+#ifndef FAST_FAIR_TREE_H
+#define FAST_FAIR_TREE_H
 
 #include <cassert>
 #include <climits>
@@ -1093,3 +1095,5 @@ void btree::randScounter() {
     } while (leftmost.oid.off != 0);
   }
 }
+
+#endif // FAST_FAIR_TREE_H
